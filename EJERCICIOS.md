@@ -31,6 +31,26 @@ Escribe un pensamiento difícil y responde: “¿Qué evidencia lo apoya?”, �
 
 ## 2. Bienestar físico
 
+### Sentadillas a silla — 6 minutos
+
+Coloca una silla firme detrás de ti. Haz 8 repeticiones lentas, rozando el asiento y subiendo con control. Descansa 30 segundos y repite hasta completar tres rondas. Usa el respaldo como apoyo si lo necesitas.
+
+### Caminata consciente — 8 minutos
+
+Camina en un lugar seguro: dos minutos suave, cuatro a ritmo cómodo y dos minutos reduciendo la velocidad. Nota el apoyo de los pies y el movimiento de los brazos. También puedes hacerlo dentro de casa.
+
+### Movilidad de espalda — 5 minutos
+
+Haz 45 segundos de círculos de hombros, gato-vaca sentado, rotación suave de torso y balanceo de cadera, con 15 segundos de pausa entre movimientos. Repite dos rondas, sin rebotes.
+
+### Equilibrio con apoyo — 4 minutos
+
+Junto a una pared o silla firme, eleva un pie durante 20 segundos y cambia de lado. Repite cuatro rondas. Mantén un apoyo cerca y hazlo sentado o con ambos pies en el suelo si te sientes inestable.
+
+### Baile de una canción — 7 minutos
+
+Elige una canción y mueve brazos, hombros, cadera o pies de la forma que te resulte agradable. No hay pasos correctos; puedes hacerlo sentado y bajar la intensidad al terminar.
+
 ### Escaneo corporal — 4 minutos
 
 Recorre mentalmente desde la cabeza hasta los pies. Observa tensión, temperatura, hambre, sed y cansancio. No intentes cambiar todo; elige una respuesta concreta, como beber agua o cambiar de postura.
