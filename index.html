@@ -1,65 +1,26 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mi Salud Mental: ejercicios interactivos para cuidar tu bienestar integral." />
-  <title>Mi Salud Mental · Bienestar integral</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mi Salud Mental: un espacio interactivo para cuidar tu bienestar integral." />
+  <title>Mi Salud Mental · Tu espacio de bienestar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" /><link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-mark">✦</span><span>Mi Salud Mental</span></a>
-    <nav class="nav-links" aria-label="Navegación principal">
-      <a href="#ejercicios">Ejercicios</a><a href="#progreso">Mi progreso</a><a href="#recursos">Recursos</a>
-    </nav>
-    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">☼</button>
-  </header>
-
-  <main>
-    <section class="hero wrap" id="inicio">
-      <div class="hero-copy">
-        <p class="eyebrow">Tu pausa también importa</p>
-        <h1>Cuida tu bienestar,<br /><em>un momento a la vez.</em></h1>
-        <p class="hero-text">Pequeños ejercicios para conectar con tu mente, tu cuerpo, tus vínculos y aquello que te da sentido.</p>
-        <div class="hero-actions"><a class="button button-primary" href="#ejercicios">Comenzar ahora <span>→</span></a><button class="text-button" id="surpriseBtn">Sorpréndeme <span>✦</span></button></div>
-        <div class="trust-line"><span class="avatars"><i>☻</i><i>♡</i><i>☀</i></span><span>Prácticas de 2–15 min · a tu propio ritmo</span></div>
+  <header class="topbar"><a class="brand" href="#inicio"><span class="brand-mark">✦</span><span>Mi Salud Mental</span></a><nav class="nav-links"><a class="nav-active" href="#inicio">Mi espacio</a><a href="#biblioteca">Biblioteca</a><a href="#progreso">Progreso</a></nav><div class="top-actions"><button class="icon-button" id="themeToggle" aria-label="Cambiar tema">☼</button><button class="avatar-button" id="profileBtn" aria-label="Abrir perfil">TÚ</button></div></header>
+  <main class="dashboard wrap" id="inicio">
+    <div class="welcome-row"><div><p class="eyebrow">Lunes, 14 de septiembre</p><h1>Hola, <em>qué bueno verte.</em></h1><p class="welcome-sub">Este espacio es tuyo. ¿Qué necesitas cuidar hoy?</p></div><button class="button button-primary soft" id="surpriseBtn">Elegir por mí <span>✦</span></button></div>
+    <section class="checkin-panel"><div class="checkin-copy"><span class="checkin-icon">☀</span><div><h2>Tu check-in de hoy</h2><p>Tomarte un momento para escucharte ya es una forma de cuidado.</p></div></div><div class="mood-options" role="radiogroup" aria-label="Estado de ánimo"><button data-mood="1" aria-label="Muy abajo">😔<span>Muy abajo</span></button><button data-mood="2" aria-label="Bajito">😕<span>Bajito</span></button><button data-mood="3" aria-label="Neutral">😐<span>Neutral</span></button><button data-mood="4" aria-label="Bien">🙂<span>Bien</span></button><button data-mood="5" aria-label="Muy bien">😊<span>Muy bien</span></button></div><p class="saved-note" id="moodMessage" role="status"></p></section>
+    <div class="content-grid">
+      <div class="main-column">
+        <section class="today-route"><div class="section-heading compact"><div><p class="eyebrow">Ruta recomendada</p><h2>Un poco de todo</h2></div><span class="route-time">12 min en total</span></div><p class="muted route-intro">Una secuencia corta para tocar las cuatro áreas de tu bienestar. Puedes hacerla completa o elegir solo un paso.</p><div class="route-steps"><button class="route-step mental-step open-exercise" data-modal="breathing"><span class="step-number">1</span><span class="step-icon">◌</span><span class="step-copy"><strong>Respira</strong><small>2 min · Mental</small></span><span class="step-arrow">→</span></button><button class="route-step physical-step open-exercise" data-modal="movement"><span class="step-number">2</span><span class="step-icon">↗</span><span class="step-copy"><strong>Muévete</strong><small>5 min · Físico</small></span><span class="step-arrow">→</span></button><button class="route-step social-step open-exercise" data-modal="social"><span class="step-number">3</span><span class="step-icon">♡</span><span class="step-copy"><strong>Conecta</strong><small>3 min · Social</small></span><span class="step-arrow">→</span></button><button class="route-step spirit-step open-exercise" data-modal="values"><span class="step-number">4</span><span class="step-icon">✦</span><span class="step-copy"><strong>Encuentra sentido</strong><small>2 min · Espiritual</small></span><span class="step-arrow">→</span></button></div></section>
+        <section class="section library-section" id="biblioteca"><div class="section-heading compact"><div><p class="eyebrow">Biblioteca de prácticas</p><h2>¿Qué te vendría bien?</h2></div><button class="text-button" id="clearSearch">Ver todas <span>→</span></button></div><div class="intent-grid"><button class="intent-card" data-filter-intent="calma"><span>◌</span><strong>Necesito calma</strong><small>Respirar y bajar revoluciones</small></button><button class="intent-card" data-filter-intent="energia"><span>↗</span><strong>Quiero energía</strong><small>Activar cuerpo y mente</small></button><button class="intent-card" data-filter-intent="conexion"><span>♡</span><strong>Quiero conectar</strong><small>Acercarme a alguien</small></button><button class="intent-card" data-filter-intent="sentido"><span>✦</span><strong>Busco sentido</strong><small>Volver a lo importante</small></button></div><div class="library-toolbar"><div class="category-tabs" role="tablist"><button class="active" data-filter="all">Todos</button><button data-filter="mental">Mental</button><button data-filter="fisico">Físico</button><button data-filter="social">Social</button><button data-filter="espiritual">Espiritual</button></div><label class="search-box"><span>⌕</span><input id="exerciseSearch" placeholder="Buscar una práctica…" /></label></div><div class="exercise-grid" id="exerciseGrid"><article class="exercise-card" data-category="mental" data-intents="calma"><div class="card-top"><span class="category-pill mental-pill">MENTAL</span><span class="duration">2 min</span></div><div class="icon lavender">◌</div><h3>Respiración 4–6</h3><p>Una pausa para bajar el ritmo y volver al presente.</p><button class="card-button open-exercise" data-modal="breathing">Empezar <span>→</span></button></article><article class="exercise-card" data-category="fisico" data-intents="energia"><div class="card-top"><span class="category-pill mint-pill">FÍSICO</span><span class="duration">5 min</span></div><div class="icon mint">↗</div><h3>Movimiento amable</h3><p>Activa tu cuerpo sin exigencia ni perfección.</p><button class="card-button open-exercise" data-modal="movement">Empezar <span>→</span></button></article><article class="exercise-card" data-category="social" data-intents="conexion"><div class="card-top"><span class="category-pill peach-pill">SOCIAL</span><span class="duration">3 min</span></div><div class="icon peach">♡</div><h3>Mensaje de conexión</h3><p>Acércate a alguien con una pregunta que sí importa.</p><button class="card-button open-exercise" data-modal="social">Empezar <span>→</span></button></article><article class="exercise-card" data-category="espiritual" data-intents="sentido"><div class="card-top"><span class="category-pill yellow-pill">ESPIRITUAL</span><span class="duration">2 min</span></div><div class="icon yellow">✦</div><h3>Brújula de valores</h3><p>Convierte lo que valoras en un paso pequeño para hoy.</p><button class="card-button open-exercise" data-modal="values">Empezar <span>→</span></button></article></div></section>
+        <section class="journal-section" id="diario"><div class="section-heading compact"><div><p class="eyebrow">Tu diario privado</p><h2>Escribe para soltar</h2></div><span class="private-note">▣ Solo en este dispositivo</span></div><p class="muted">No tienes que escribir bonito. Solo deja aquí lo que necesites sacar.</p><textarea id="journalInput" class="journal-input" rows="4" placeholder="Hoy me siento… porque… y necesito…"></textarea><div class="journal-actions"><span id="journalStatus">Tus palabras se guardan localmente.</span><button class="button button-dark" id="saveJournal">Guardar nota <span>→</span></button></div><div class="saved-journal" id="savedJournal"></div></section>
       </div>
-      <div class="hero-art" aria-hidden="true"><div class="sun-orb"></div><div class="leaf leaf-one">◜</div><div class="leaf leaf-two">◝</div><div class="art-card art-card-top">respira<br /><strong>sin prisa</strong></div><div class="art-card art-card-bottom">hoy cuenta<br /><strong>lo pequeño</strong></div><div class="person">◡<span></span></div></div>
-    </section>
-
-    <section class="quick-check wrap" aria-labelledby="check-title">
-      <div><p class="eyebrow">Antes de empezar</p><h2 id="check-title">¿Cómo te sientes hoy?</h2><p class="muted">No hay respuestas buenas o malas. Solo observa.</p></div>
-      <div class="mood-options" role="radiogroup" aria-label="Estado de ánimo">
-        <button data-mood="1" aria-label="Muy abajo">😔<span>Muy abajo</span></button><button data-mood="2" aria-label="Bajito">😕<span>Bajito</span></button><button data-mood="3" aria-label="Neutral">😐<span>Neutral</span></button><button data-mood="4" aria-label="Bien">🙂<span>Bien</span></button><button data-mood="5" aria-label="Muy bien">😊<span>Muy bien</span></button>
-      </div><p class="saved-note" id="moodMessage" role="status"></p>
-    </section>
-
-    <section class="section wrap" id="ejercicios">
-      <div class="section-heading"><div><p class="eyebrow">Elige tu camino</p><h2>Un ejercicio para este momento</h2></div><p class="muted heading-note">Explora las cuatro áreas de tu bienestar.</p></div>
-      <div class="category-tabs" role="tablist"><button class="active" data-filter="all">Todos</button><button data-filter="mental">Mental</button><button data-filter="fisico">Físico</button><button data-filter="social">Social</button><button data-filter="espiritual">Espiritual</button></div>
-      <div class="exercise-grid" id="exerciseGrid">
-        <article class="exercise-card featured" data-category="mental" data-exercise="respiracion"><div class="card-top"><span class="category-pill mental-pill">MENTAL</span><span class="duration">2 min</span></div><div class="icon lavender">◌</div><h3>Respiración 4–6</h3><p>Una pausa para bajar el ritmo y volver al presente.</p><button class="card-button open-exercise" data-modal="breathing">Empezar <span>→</span></button></article>
-        <article class="exercise-card" data-category="fisico" data-exercise="movimiento"><div class="card-top"><span class="category-pill mint-pill">FÍSICO</span><span class="duration">5 min</span></div><div class="icon mint">↗</div><h3>Movimiento amable</h3><p>Activa tu cuerpo sin exigencia ni perfección.</p><button class="card-button open-exercise" data-modal="movement">Empezar <span>→</span></button></article>
-        <article class="exercise-card" data-category="social" data-exercise="conexion"><div class="card-top"><span class="category-pill peach-pill">SOCIAL</span><span class="duration">3 min</span></div><div class="icon peach">♡</div><h3>Mensaje de conexión</h3><p>Acércate a alguien con una pregunta que sí importa.</p><button class="card-button open-exercise" data-modal="social">Empezar <span>→</span></button></article>
-        <article class="exercise-card" data-category="espiritual" data-exercise="valores"><div class="card-top"><span class="category-pill yellow-pill">ESPIRITUAL</span><span class="duration">5 min</span></div><div class="icon yellow">✦</div><h3>Brújula de valores</h3><p>Convierte lo que valoras en un paso pequeño para hoy.</p><button class="card-button open-exercise" data-modal="values">Empezar <span>→</span></button></article>
-      </div>
-    </section>
-
-    <section class="breathing-banner wrap"><div class="breathing-copy"><p class="eyebrow">Tu práctica de hoy</p><h2>Inhala calma.<br /><em>Exhala tensión.</em></h2><p>Cuando no sepas por dónde empezar, vuelve a tu respiración.</p><button class="button button-dark open-exercise" data-modal="breathing">Hacer una pausa <span>→</span></button></div><div class="breathing-visual"><div class="breath-ring"><span>inhala</span></div><div class="sparkle s1">✦</div><div class="sparkle s2">·</div><div class="sparkle s3">✧</div></div></section>
-
-    <section class="section wrap" id="progreso"><div class="section-heading"><div><p class="eyebrow">Sin presión</p><h2>Tu progreso semanal</h2></div><p class="muted heading-note">La constancia también puede ser suave.</p></div><div class="progress-layout"><div class="progress-card"><div class="progress-number"><strong id="progressCount">0</strong><span>/ 7 días</span></div><div class="progress-bar"><span id="progressBar"></span></div><p id="progressMessage">Marca un día cuando hagas algo por ti.</p><div class="week-days" id="weekDays"></div></div><div class="quote-card"><span class="quote-mark">“</span><p>Descansar, pedir ayuda y empezar de nuevo también son formas de avanzar.</p><span class="quote-author">— una nota para ti</span></div></div></section>
-
-    <section class="resources wrap" id="recursos"><div><p class="eyebrow">Un recordatorio importante</p><h2>Esto no tienes que hacerlo<br /><em>en soledad.</em></h2></div><div class="resource-text"><p>Estos ejercicios son herramientas de autocuidado, no reemplazan la atención profesional. Si tu malestar persiste, interfiere con tu vida o sientes que no puedes mantenerte a salvo, busca apoyo.</p><a href="https://findahelpline.com/es" target="_blank" rel="noreferrer" class="resource-link">Encontrar una línea de ayuda <span>↗</span></a></div></section>
+      <aside class="side-column"><section class="streak-card" id="progreso"><div class="streak-header"><div><p class="eyebrow">Tu ritmo</p><h2><strong id="progressCount">0</strong> <small>días</small></h2></div><span class="streak-flame">♨</span></div><p id="progressMessage">Empieza marcando una práctica.</p><div class="progress-bar"><span id="progressBar"></span></div><div class="week-days" id="weekDays"></div><p class="streak-footer">Cada día cuenta, incluso los difíciles.</p></section><section class="micro-card"><span class="micro-icon">✎</span><div><strong>Una pregunta para hoy</strong><p id="dailyQuestion">¿Qué necesitas darte permiso de sentir?</p></div><button class="refresh-question" id="refreshQuestion" aria-label="Cambiar pregunta">↻</button></section><section class="help-card" id="recursos"><span>♡</span><h3>No tienes que hacerlo en soledad</h3><p>Si te sientes en peligro o no puedes mantenerte a salvo, busca apoyo profesional o una línea de crisis.</p><a href="https://findahelpline.com/es" target="_blank" rel="noreferrer">Encontrar ayuda <b>↗</b></a></section></aside>
+    </div>
   </main>
-
-  <footer class="footer wrap"><a class="brand" href="#inicio"><span class="brand-mark">✦</span><span>Mi Salud Mental</span></a><span>Hecho para cuidar lo cotidiano.</span><span>© 2026 · <a href="README.md">Sobre el proyecto</a></span></footer>
-
-  <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Cerrar">×</button><div id="modalContent"></div></div></div>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="app.js"></script>
-</body>
-</html>
+  <footer class="footer wrap"><a class="brand" href="#inicio"><span class="brand-mark">✦</span><span>Mi Salud Mental</span></a><span>Hecho para cuidar lo cotidiano.</span><a href="README.md">Sobre el proyecto</a></footer>
+  <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Cerrar">×</button><div id="modalContent"></div></div></div><div class="toast" id="toast" role="status"></div><script src="app.js"></script>
+</body></html>
