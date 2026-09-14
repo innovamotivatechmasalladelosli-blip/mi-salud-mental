@@ -49,3 +49,18 @@ Puedes proponer nuevos ejercicios, mejorar las explicaciones o traducir el mater
 ## Licencia
 
 Este material se publica bajo la licencia MIT. Consulta [LICENSE](./LICENSE).
+
+
+## Interfaz web interactiva
+
+El archivo [`index.html`](./index.html) contiene una experiencia visual y responsiva para usar los ejercicios directamente desde el navegador. Incluye:
+
+- Check-in diario de estado de ánimo.
+- Filtros por dimensión del bienestar.
+- Temporizador interactivo para respiración 4–6 y movimiento amable.
+- Mensaje de conexión listo para copiar.
+- Brújula de valores con reflexión guardada localmente.
+- Progreso semanal con persistencia en el navegador.
+- Modo claro y modo oscuro.
+
+Para verla localmente, abre `index.html` en un navegador. En GitHub, puedes activarla como GitHub Pages desde **Settings → Pages → Deploy from a branch → main → /(root)**.

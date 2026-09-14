@@ -1,0 +1,45 @@
+const $ = (selector, parent = document) => parent.querySelector(selector);
+const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+const store = { get(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } }, set(key, value) { localStorage.setItem(key, JSON.stringify(value)); } };
+
+const modalBackdrop = $('#modalBackdrop');
+const modalContent = $('#modalContent');
+let timer = null;
+let secondsLeft = 0;
+
+function openModal(type) {
+  clearInterval(timer);
+  const views = {
+    breathing: `<p class="eyebrow">Ejercicio mental · 2 min</p><h2 id="modalTitle">Respiración 4–6</h2><p class="modal-intro">Sigue el círculo: inhala cuando crece y exhala cuando vuelve a su tamaño. No tienes que forzar nada.</p><div class="timer-label" id="timerLabel">Listo para comenzar</div><div class="timer-display" id="timerDisplay">02:00</div><div class="modal-actions"><button class="button button-primary" id="timerStart">Comenzar</button><button class="button button-dark" id="timerReset">Reiniciar</button></div><p class="mini-note">Si contar te incomoda, respira naturalmente y enfócate solo en alargar suavemente la exhalación.</p>`,
+    movement: `<p class="eyebrow">Ejercicio físico · 5 min</p><h2 id="modalTitle">Movimiento amable</h2><p class="modal-intro">Hazlo a tu ritmo. Completa cada bloque sin dolor: si algo no se siente bien, cambia el movimiento o descansa.</p><div class="timer-label" id="timerLabel">4 bloques · 1 min cada uno</div><div class="timer-display" id="timerDisplay">05:00</div><div class="modal-actions"><button class="button button-primary" id="timerStart">Comenzar</button><button class="button button-dark" id="timerReset">Reiniciar</button></div><p class="mini-note">Camina en el lugar · círculos de hombros · estiramiento suave · respiración.</p>`,
+    social: `<p class="eyebrow">Ejercicio social · 3 min</p><h2 id="modalTitle">Mensaje de conexión</h2><p class="modal-intro">Elige a alguien y completa este mensaje. Puedes copiarlo o hacerlo tuyo.</p><div class="mini-note" style="font-size:15px">“Hola, hoy pensé en ti. ¿Cómo estás realmente? No tienes que responder ahora, solo quería hacerte saber que me importas.”</div><button class="button button-primary" id="copyMessage" style="margin-top:18px">Copiar mensaje <span>↗</span></button><p class="modal-intro" id="copyStatus"></p>`,
+    values: `<p class="eyebrow">Ejercicio de propósito · 5 min</p><h2 id="modalTitle">Brújula de valores</h2><p class="modal-intro">Nombra lo que importa y conviértelo en una acción pequeña y posible.</p><label for="valueInput">Un valor importante para mí</label><input id="valueInput" placeholder="Ej. calma, honestidad, familia…" /><label for="actionInput">Hoy lo practicaré así</label><textarea id="actionInput" rows="3" placeholder="Una acción concreta y amable contigo…"></textarea><button class="button button-primary" id="saveValues">Guardar reflexión <span>→</span></button><p class="modal-intro" id="valueStatus"></p>`
+  };
+  modalContent.innerHTML = views[type];
+  modalBackdrop.hidden = false;
+  document.body.style.overflow = 'hidden';
+  if (type === 'breathing' || type === 'movement') setupTimer(type);
+  if (type === 'social') $('#copyMessage').addEventListener('click', async () => { try { await navigator.clipboard.writeText('Hola, hoy pensé en ti. ¿Cómo estás realmente? No tienes que responder ahora, solo quería hacerte saber que me importas.'); $('#copyStatus').textContent = 'Mensaje copiado. Ahora envíalo cuando te sientas listo/a.'; } catch { $('#copyStatus').textContent = 'Cópialo desde el recuadro y envíalo a alguien de confianza.'; } });
+  if (type === 'values') $('#saveValues').addEventListener('click', () => { const value = $('#valueInput').value.trim(); const action = $('#actionInput').value.trim(); if (!value || !action) { $('#valueStatus').textContent = 'Completa ambos campos para guardar tu reflexión.'; return; } store.set('lastReflection', { value, action, date: new Date().toLocaleDateString('es-MX') }); $('#valueStatus').textContent = 'Guardado en este dispositivo. Qué bonito elegir con intención.'; $('#saveValues').textContent = 'Guardado ✓'; });
+}
+function closeModal() { clearInterval(timer); modalBackdrop.hidden = true; document.body.style.overflow = ''; }
+function setupTimer(type) { secondsLeft = type === 'breathing' ? 120 : 300; const display = $('#timerDisplay'); const label = $('#timerLabel'); const update = () => { const m = String(Math.floor(secondsLeft / 60)).padStart(2, '0'); const s = String(secondsLeft % 60).padStart(2, '0'); display.textContent = `${m}:${s}`; }; update(); $('#timerStart').addEventListener('click', () => { if (timer) return; label.textContent = type === 'breathing' ? 'Sigue el círculo · inhala y exhala' : 'Muévete con suavidad'; timer = setInterval(() => { secondsLeft -= 1; update(); if (secondsLeft <= 0) { clearInterval(timer); timer = null; label.textContent = '¡Práctica completada!'; showToast('Lo hiciste. Un momento para ti cuenta.'); refreshProgress(true); } }, 1000); $('#timerStart').textContent = 'En curso…'; }); $('#timerReset').addEventListener('click', () => { clearInterval(timer); timer = null; secondsLeft = type === 'breathing' ? 120 : 300; label.textContent = 'Listo para comenzar'; $('#timerStart').textContent = 'Comenzar'; update(); }); }
+
+$$('.open-exercise').forEach(button => button.addEventListener('click', () => openModal(button.dataset.modal)));
+$('#modalClose').addEventListener('click', closeModal);
+modalBackdrop.addEventListener('click', e => { if (e.target === modalBackdrop) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modalBackdrop.hidden) closeModal(); });
+
+$$('.mood-options button').forEach(button => button.addEventListener('click', () => { $$('.mood-options button').forEach(b => b.classList.remove('selected')); button.classList.add('selected'); const mood = button.dataset.mood; store.set('moodToday', { mood, date: new Date().toDateString() }); $('#moodMessage').textContent = 'Guardado. Gracias por escucharte hoy.'; }));
+const moodSaved = store.get('moodToday', null); if (moodSaved?.date === new Date().toDateString()) { const selected = $(`[data-mood="${moodSaved.mood}"]`); selected?.classList.add('selected'); $('#moodMessage').textContent = 'Ya registraste cómo te sientes hoy.'; }
+
+$$('.category-tabs button').forEach(button => button.addEventListener('click', () => { $$('.category-tabs button').forEach(b => b.classList.remove('active')); button.classList.add('active'); const filter = button.dataset.filter; $$('.exercise-card').forEach(card => { card.style.display = filter === 'all' || card.dataset.category === filter ? 'flex' : 'none'; }); }));
+$('#surpriseBtn').addEventListener('click', () => { const cards = $$('.exercise-card'); const card = cards[Math.floor(Math.random() * cards.length)]; openModal(card.querySelector('.open-exercise').dataset.modal); });
+
+function refreshProgress(addToday = false) { let progress = store.get('weekProgress', {}); const weekKey = new Date().toISOString().slice(0, 10); if (addToday) progress[weekKey] = true; store.set('weekProgress', progress); const count = Object.keys(progress).filter(key => { const d = new Date(key); const days = (Date.now() - d.getTime()) / 86400000; return days >= 0 && days < 7; }).length; $('#progressCount').textContent = count; $('#progressBar').style.width = `${Math.min(count / 7 * 100, 100)}%`; $('#progressMessage').textContent = count === 0 ? 'Marca un día cuando hagas algo por ti.' : count === 1 ? 'Un día a la vez. Ya comenzaste.' : `${count} días de cuidado propio esta semana.`; }
+function renderWeek() { const days = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom']; const today = new Date(); const mondayOffset = (today.getDay() + 6) % 7; const monday = new Date(today); monday.setDate(today.getDate() - mondayOffset); const progress = store.get('weekProgress', {}); $('#weekDays').innerHTML = days.map((name, i) => { const date = new Date(monday); date.setDate(monday.getDate() + i); const key = date.toISOString().slice(0, 10); const isDone = progress[key]; return `<div class="day"><span>${name}</span><button class="${isDone ? 'done' : ''}" data-day="${key}" aria-label="Marcar ${name}">${isDone ? '✓' : ''}</button></div>`; }).join(''); $$('.day button').forEach(button => button.addEventListener('click', () => { const p = store.get('weekProgress', {}); if (p[button.dataset.day]) delete p[button.dataset.day]; else p[button.dataset.day] = true; store.set('weekProgress', p); renderWeek(); refreshProgress(); })); }
+renderWeek(); refreshProgress();
+
+$('#themeToggle').addEventListener('click', () => { document.body.classList.toggle('dark'); const dark = document.body.classList.contains('dark'); store.set('darkMode', dark); $('#themeToggle').textContent = dark ? '☾' : '☼'; });
+if (store.get('darkMode', false)) { document.body.classList.add('dark'); $('#themeToggle').textContent = '☾'; }
+function showToast(message) { const toast = $('#toast'); toast.textContent = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); }
