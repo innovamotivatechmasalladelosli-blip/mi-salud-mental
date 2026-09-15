@@ -1,5 +1,9 @@
 # Mi Salud Mental
 
+## Proyecto de Uriel Medeles Alvarado 1G
+
+Experiencia interactiva de bienestar integral con actividades mentales, físicas, sociales, espirituales y creativas.
+
 Un espacio sencillo y práctico para cuidar el bienestar **mental, físico, social y espiritual** mediante ejercicios breves, dinámicos y fáciles de adaptar.
 
 > Este proyecto ofrece educación general y actividades de autocuidado. No sustituye la atención de un profesional de la salud. Si existe una emergencia, riesgo de hacerse daño o peligro inmediato, contacta a los servicios de emergencia de tu país o a una línea de crisis local.
@@ -62,5 +66,7 @@ El archivo [`index.html`](./index.html) contiene una experiencia visual y respon
 - Brújula de valores con reflexión guardada localmente.
 - Progreso semanal con persistencia en el navegador.
 - Modo claro y modo oscuro.
+- Laboratorio de bienestar con dinámicas rápidas, gráficos decorativos y animaciones suaves.
+- Actividades ampliadas en todas las áreas: reencuadre, escucha, amabilidad, lugar seguro, intención y pausas corporales.
 
 Para verla localmente, abre `index.html` en un navegador. En GitHub, puedes activarla como GitHub Pages desde **Settings → Pages → Deploy from a branch → main → /(root)**.
