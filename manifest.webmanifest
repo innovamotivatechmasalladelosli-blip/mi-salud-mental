@@ -1,0 +1,11 @@
+{
+  "name": "Mi Salud Mental",
+  "short_name": "Mi Salud Mental",
+  "lang": "es",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f8f7f2",
+  "theme_color": "#315e58",
+  "description": "Prácticas breves y privadas para volver a ti.",
+  "icons": []
+}
