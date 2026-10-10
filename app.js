@@ -139,3 +139,35 @@ function nodeEditorView() { return `<p class="eyebrow">Laboratorio creativo</p><
 function openNodeEditor() { modalContent.innerHTML = nodeEditorView(); modalBackdrop.hidden = false; document.body.style.overflow = 'hidden'; let nodes = store.get('nodeExercisesDraft', [{ id: `node-${Date.now()}`, type: 'start', title: 'Comenzar', text: '¿Qué necesitas ahora?' }]); const canvas = $('#nodeCanvas'); const draw = () => { canvas.innerHTML = nodes.map((node, index) => `<article class="flow-node" data-node-id="${node.id}"><div class="flow-node-head"><span>${index + 1}. ${nodeTypes[node.type] || 'Paso'}</span><button type="button" class="remove-node" data-remove-node="${node.id}" aria-label="Eliminar nodo">×</button></div><input data-node-field="title" data-node-id="${node.id}" value="${(node.title || '').replace(/"/g, '&quot;')}" placeholder="Título del paso" /><textarea data-node-field="text" data-node-id="${node.id}" rows="2" placeholder="¿Qué hará la persona?">${node.text || ''}</textarea><label class="node-next">Después continúa con<select data-node-field="next" data-node-id="${node.id}"><option value="">Siguiente paso</option>${nodes.filter(next => next.id !== node.id).map(next => `<option value="${next.id}" ${node.next === next.id ? 'selected' : ''}>${nodeTypes[next.type]} · ${next.title || 'Sin título'}</option>`).join('')}</select></label></article>`).join(''); canvas.querySelectorAll('[data-node-field]').forEach(field => field.addEventListener('input', () => { const node = nodes.find(item => item.id === field.dataset.nodeId); if (node) node[field.dataset.nodeField] = field.value; })); canvas.querySelectorAll('[data-remove-node]').forEach(button => button.addEventListener('click', () => { nodes = nodes.filter(node => node.id !== button.dataset.removeNode); nodes.forEach(node => { if (node.next === button.dataset.removeNode) node.next = ''; }); draw(); })); };
   draw(); $('#addExerciseNode').addEventListener('click', () => { nodes.push({ id: `node-${Date.now()}-${nodes.length}`, type: $('#nodeTypeToAdd').value, title: nodeTypes[$('#nodeTypeToAdd').value], text: '' }); draw(); }); $('#clearExerciseNodes').addEventListener('click', () => { nodes = []; draw(); }); $('#saveNodeExercise').addEventListener('click', () => { if (!nodes.length) { $('#nodeEditorStatus').textContent = 'Añade al menos un nodo antes de guardar.'; return; } store.set('nodeExercisesDraft', nodes); const custom = getCustomExercises(); custom.push({ id: `flow-${Date.now()}`, title: nodes[0].title || 'Mi flujo de bienestar', description: 'Ejercicio creado con el editor por nodos.', category: 'mental', duration: 5, intensity: 'Suave', instructions: nodes.map((node, index) => `${index + 1}. ${node.title}: ${node.text}`).join('\n'), reflection: '¿Qué noté al completar mi flujo?' }); store.set('customExercises', custom); renderCustomExercises(); closeModal(); showToast('Flujo guardado como nuevo ejercicio.'); }); $('#modalClose').focus(); }
 $('#openNodeEditor')?.addEventListener('click', openNodeEditor);
+
+// En “Todas” se muestra una selección breve; las categorías y “Ver todas” permiten explorar el catálogo completo.
+let showAllCatalog = false;
+function updateCatalogNote(filter = 'all', intent = '') {
+  let note = $('#catalogNote');
+  if (!note) { note = document.createElement('p'); note.id = 'catalogNote'; note.className = 'catalog-note'; $('.library-section .section-heading')?.appendChild(note); }
+  if (filter === 'all' && !intent && !showAllCatalog && !($('#exerciseSearch')?.value.trim())) { note.textContent = 'Mostrando una selección para no saturar la pantalla. Usa “Ver todas” para abrir el catálogo completo.'; $('#clearSearch').textContent = 'Ver todas →'; }
+  else if (filter === 'all' && !intent) { note.textContent = 'Catálogo completo abierto.'; $('#clearSearch').textContent = 'Cerrar catálogo ↑'; }
+  else { note.textContent = 'Mostrando los ejercicios de esta categoría.'; $('#clearSearch').textContent = 'Ver todas →'; }
+}
+function filterCards(filter = 'all', intent = '') {
+  const search = ($('#exerciseSearch')?.value || '').trim().toLowerCase();
+  const cards = $$('.exercise-card');
+  cards.forEach((card, index) => {
+    const categoryOk = filter === 'all' || card.dataset.category === filter;
+    const intentOk = !intent || (card.dataset.intents || '').includes(intent);
+    const searchOk = !search || card.textContent.toLowerCase().includes(search);
+    const limited = filter === 'all' && !intent && !showAllCatalog && !search && index >= 16;
+    card.classList.toggle('all-overflow-hidden', limited);
+    card.classList.toggle('hidden-card', !categoryOk || !intentOk || !searchOk || limited);
+  });
+  updateCatalogNote(filter, intent);
+}
+$('#clearSearch')?.addEventListener('click', () => {
+  const search = $('#exerciseSearch');
+  if (search?.value) search.value = '';
+  showAllCatalog = !showAllCatalog;
+  filterCards('all');
+});
+$('#exerciseSearch')?.addEventListener('input', () => { showAllCatalog = false; filterCards('all'); });
+$$('.category-tabs button').forEach(button => button.addEventListener('click', () => { showAllCatalog = true; filterCards(button.dataset.filter); }));
+filterCards('all');
