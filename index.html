@@ -21,8 +21,22 @@
       <aside class="side-column"><section class="streak-card" id="progreso"><div class="streak-header"><div><p class="eyebrow">Esta semana</p><h2><strong id="progressCount">0</strong> <small>días activos</small></h2></div><span class="streak-flame">♨</span></div><p id="progressMessage">Empieza con una práctica.</p><div class="progress-bar"><span id="progressBar"></span></div><div class="week-days" id="weekDays"></div><p class="streak-footer">Cada día cuenta, incluso los difíciles.</p></section><section class="micro-card"><span class="micro-icon">✎</span><div><strong>Pregunta para hoy</strong><p id="dailyQuestion">¿Qué necesitas darte permiso de sentir?</p></div><button class="refresh-question" id="refreshQuestion" aria-label="Cambiar pregunta">↻</button></section></aside>
     </div>
     <section class="journal-section" id="diario"><div class="section-heading compact"><div><p class="eyebrow">Tu diario privado</p><h2>Escribe para soltar</h2></div><span class="private-note">▣ Solo en este dispositivo</span></div><p class="muted">No tienes que escribir bonito. Solo deja aquí lo que necesites sacar.</p><textarea id="journalInput" class="journal-input" rows="4" placeholder="Hoy me siento… porque… y necesito…"></textarea><div class="journal-actions"><span id="journalStatus">Tus palabras se guardan localmente.</span><button class="button button-dark" id="saveJournal">Guardar nota <span>→</span></button></div><div class="saved-journal" id="savedJournal"></div></section>
-    <section class="help-strip" id="recursos"><div><button class="crisis-button" id="crisisButton">Necesito ayuda ahora</button></div><div><span class="help-symbol">♡</span><div><p class="eyebrow">Un recordatorio</p><h2>No tienes que hacerlo en soledad.</h2></div></div><p>Estos ejercicios son autocuidado y no sustituyen apoyo profesional. Si no puedes mantenerte a salvo, busca ayuda inmediata.</p><a href="https://findahelpline.com/es" target="_blank" rel="noreferrer">Encontrar ayuda <b>↗</b></a><button class="motion-toggle" id="motionToggle">Animación: activa</button></section>
+    <section class="help-strip" id="recursos"><div><button class="crisis-button" id="crisisButton">Necesito ayuda ahora</button></div><div><span class="help-symbol">♡</span><div><p class="eyebrow">Un recordatorio</p><h2>No tienes que hacerlo en soledad.</h2></div></div><p>Estos ejercicios son autocuidado y no sustituyen apoyo profesional. Si no puedes mantenerte a salvo, busca ayuda inmediata.</p><a href="https://findahelpline.com/es" target="_blank" rel="noreferrer">Encontrar ayuda <b>↗</b></a></section>
   </main>
-  <footer class="footer wrap"><a class="brand" href="#inicio"><span class="brand-mark">✦</span><span>Mi Salud Mental</span></a><span>Hecho para cuidar lo cotidiano.</span><a href="README.md">Sobre el proyecto</a></footer>
-  <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Cerrar">×</button><div id="modalContent"></div></div></div><div class="toast" id="toast" role="status"></div><script src="app.js"></script>
+  <footer class="footer wrap">
+    <a class="brand" href="#inicio"><span class="brand-mark">✦</span><span>Mi Salud Mental</span></a>
+    <span>Uriel Medeles Alvarado</span>
+    <nav class="footer-legal" aria-label="Información legal">
+      <button type="button" data-legal="terms">Términos y servicios</button>
+      <button type="button" data-legal="copyright">Derechos de copyright</button>
+      <button type="button" data-legal="cookies">Política de Cookies</button>
+      <button type="button" data-legal="privacy">Aviso de Privacidad</button>
+    </nav>
+  </footer>
+  <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Cerrar">×</button><div id="modalContent"></div></div></div><div class="toast" id="toast" role="status"></div>
+  <section class="cookie-notice" id="cookieNotice" role="dialog" aria-label="Aviso de Cookies">
+    <div><strong>Política de Cookies</strong><p>Usamos almacenamiento local para guardar tus preferencias y recordar que aceptaste las Cookies. No usamos Cookies publicitarias.</p></div>
+    <button class="button button-primary" id="acceptCookies" type="button">Aceptar Cookies</button>
+  </section>
+  <script src="app.js"></script>
 </body></html>
