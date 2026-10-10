@@ -1,5 +1,5 @@
-const CACHE = 'mi-salud-mental-v14';
-const CORE_ASSETS = ['./', './index.html', './styles.css?v=14', './app.js', './manifest.webmanifest'];
+const CACHE = 'mi-salud-mental-v15';
+const CORE_ASSETS = ['./', './index.html', './styles.css?v=15', './app.js', './manifest.webmanifest'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting()));
