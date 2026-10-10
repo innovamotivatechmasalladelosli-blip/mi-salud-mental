@@ -50,3 +50,8 @@ html,body{max-width:100%;overflow-x:hidden}button,a,input,textarea{touch-action:
 .cookie-notice .button{flex:none;white-space:nowrap;padding:10px 13px;font-size:11px}
 .legal-copy{color:var(--muted);font-size:13px;line-height:1.65}.legal-copy p{margin:0 0 14px}
 @media(max-width:600px){.cookie-notice{display:block}.cookie-notice .button{width:100%;margin-top:12px;justify-content:center}.footer-legal{gap:10px 14px}}
+
+/* Corrección definitiva del contador de progreso */
+.streak-card .streak-total{display:flex!important;align-items:baseline!important;gap:8px!important;flex-wrap:nowrap!important;white-space:nowrap!important;line-height:1!important;margin:0!important}
+.streak-card .streak-total strong{display:inline-block!important;font-family:Fraunces,serif!important;font-size:40px!important;line-height:1!important;position:static!important}
+.streak-card .streak-total small{display:inline-block!important;font-family:'DM Sans',sans-serif!important;font-size:12px!important;font-weight:500!important;line-height:1.2!important;white-space:nowrap!important;position:static!important;vertical-align:baseline!important}
